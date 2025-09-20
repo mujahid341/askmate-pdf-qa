@@ -300,7 +300,7 @@ if st.session_state.pdf_ready:
                 model_name="sentence-transformers/all-MiniLM-L6-v2",
                 model_kwargs={"device": "cpu"}
             )
-            vectorstore = Chroma.from_documents(chunks, embedding=embeddings)
+            vectorstore = Chroma.from_documents(chunks, embedding=embeddings,persist_directory=None)
     except Exception as e:
         st.error(f"Error creating search index: {e}")
         st.stop()
