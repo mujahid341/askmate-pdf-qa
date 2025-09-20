@@ -1,0 +1,40 @@
+
+---
+
+## 📄 .gitignore  
+
+```gitignore
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env
+*.env
+
+# Streamlit
+.streamlit/
+
+# ChromaDB local storage
+chroma/
+*.sqlite
+*.db
+
+# Logs
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+
+# Uploaded and temp files
+temp.pdf
+uploaded.pdf
