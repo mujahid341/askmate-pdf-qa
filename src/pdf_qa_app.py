@@ -194,9 +194,14 @@
 #         st.error(f"Failed to initialize app components: {e}")
 
 
-__import__('pysqlite3')
+import os
 import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+# Only use pysqlite3 on Streamlit Cloud (Linux)
+if os.environ.get("STREAMLIT_RUNTIME") == "true":
+    __import__('pysqlite3')
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 
 import os
 import time
@@ -305,7 +310,12 @@ if st.session_state.pdf_ready:
                 model_name="sentence-transformers/all-MiniLM-L6-v2",
                 model_kwargs={"device": "cpu"}
             )
-            vectorstore = Chroma.from_documents(chunks, embedding=embeddings,persist_directory=None)
+            # vectorstore = Chroma.from_documents(chunks, embedding=embeddings,persist_directory=None)
+            vectorstore = Chroma.from_documents(
+    chunks,
+    embedding=embeddings,
+    collection_name="askmate_temp"
+)
             
     except Exception as e:
         st.error(f"Error creating search index: {e}")
