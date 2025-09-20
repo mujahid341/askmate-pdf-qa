@@ -25,3 +25,4 @@ PyPDF2
 torch 
 torchvision 
 torchaudio
+pysqlite3-binary

@@ -194,6 +194,9 @@
 #         st.error(f"Failed to initialize app components: {e}")
 
 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import os
 import time
@@ -207,6 +210,8 @@ from langchain_community.vectorstores import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 import google.api_core.exceptions
+from chromadb.config import Settings
+
 
 # Load environment variables and configure API key
 load_dotenv()
@@ -301,6 +306,7 @@ if st.session_state.pdf_ready:
                 model_kwargs={"device": "cpu"}
             )
             vectorstore = Chroma.from_documents(chunks, embedding=embeddings,persist_directory=None)
+            
     except Exception as e:
         st.error(f"Error creating search index: {e}")
         st.stop()
