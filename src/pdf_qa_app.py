@@ -304,22 +304,39 @@ if st.session_state.pdf_ready:
         st.stop()
 
     # Create one combined index for all PDFs
+#     try:
+#         with st.spinner("Indexing all content..."):
+#             embeddings = HuggingFaceEmbeddings(
+#                 model_name="sentence-transformers/all-MiniLM-L6-v2",
+#                 model_kwargs={"device": "cpu"}
+#             )
+#             # vectorstore = Chroma.from_documents(chunks, embedding=embeddings,persist_directory=None)
+#             vectorstore = Chroma.from_documents(
+#     chunks,
+#     embedding=embeddings,
+#     collection_name="askmate_temp"
+# )
+            
+#     except Exception as e:
+#         st.error(f"Error creating search index: {e}")
+#         st.stop()
+
     try:
         with st.spinner("Indexing all content..."):
             embeddings = HuggingFaceEmbeddings(
                 model_name="sentence-transformers/all-MiniLM-L6-v2",
-                model_kwargs={"device": "cpu"}
+                encode_kwargs={"normalize_embeddings": False}
             )
-            # vectorstore = Chroma.from_documents(chunks, embedding=embeddings,persist_directory=None)
+
             vectorstore = Chroma.from_documents(
-    chunks,
-    embedding=embeddings,
-    collection_name="askmate_temp"
-)
-            
+                chunks,
+                embedding=embeddings,
+                collection_name="askmate_temp"
+            )
     except Exception as e:
         st.error(f"Error creating search index: {e}")
         st.stop()
+
 
     # Load model
     try:
