@@ -1,15 +1,4 @@
-chromadb 
-python-dotenv
-langchain-google-genai
-llama_index.llms.langchain
-llama-index-embeddings-huggingface
-langchain-community
-transformers
-streamlit
-langchain_huggingface
-sentence_transformers
-
-
+pysqlite3-binary
 streamlit 
 langchain 
 langchain-community 
@@ -25,4 +14,7 @@ PyPDF2
 torch 
 torchvision 
 torchaudio
-pysqlite3-binary
+llama_index.llms.langchain
+llama-index-embeddings-huggingface
+langchain_huggingface
+transformers
