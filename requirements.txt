@@ -19,3 +19,4 @@ llama_index.llms.langchain
 llama-index-embeddings-huggingface
 langchain_huggingface
 transformers
+numpy<2.0
