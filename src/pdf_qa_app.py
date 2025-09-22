@@ -194,13 +194,21 @@
 #         st.error(f"Failed to initialize app components: {e}")
 
 
-import os
-import sys
+# import os
+# import sys
 
-# Only use pysqlite3 on Streamlit Cloud (Linux)
-if os.environ.get("STREAMLIT_RUNTIME") == "true":
+# # Only use pysqlite3 on Streamlit Cloud (Linux)
+# if os.environ.get("STREAMLIT_RUNTIME") == "true":
+#     __import__('pysqlite3')
+#     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+import os, sys
+
+try:
     __import__('pysqlite3')
     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except Exception:
+    pass  # local env will just use default sqlite3
 
 
 import os
@@ -328,11 +336,16 @@ if st.session_state.pdf_ready:
                 encode_kwargs={"normalize_embeddings": False}
             )
 
+            # vectorstore = Chroma.from_documents(
+            #     chunks,
+            #     embedding=embeddings,
+            #     collection_name="askmate_temp"
+            # )
             vectorstore = Chroma.from_documents(
-                chunks,
-                embedding=embeddings,
-                collection_name="askmate_temp"
-            )
+    chunks,
+    embedding=embeddings
+)
+
     except Exception as e:
         st.error(f"Error creating search index: {e}")
         st.stop()
