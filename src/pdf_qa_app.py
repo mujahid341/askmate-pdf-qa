@@ -223,7 +223,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 import google.api_core.exceptions
-from chromadb.config import Settings
+# from chromadb.config import Settings
 
 
 # Load environment variables and configure API key

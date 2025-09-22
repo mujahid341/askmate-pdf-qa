@@ -1,4 +1,5 @@
 pysqlite3-binary
+chromadb==0.4.22
 streamlit 
 langchain 
 langchain-community 
